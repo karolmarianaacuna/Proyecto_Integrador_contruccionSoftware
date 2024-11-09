@@ -8,34 +8,37 @@ const User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    identification: {
+    identificacion: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
     },
-    password: {
+    nombre_usuario: {
         type: DataTypes.STRING,
+        allowNull: false,
+    },
+    apellido_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    rol: {
+        type: DataTypes.ENUM('Administrador', 'Docente', 'Estudiante'),
+        allowNull: false,
+    },
+    genero: {
+        type: DataTypes.ENUM('Masculino', 'Femenino', 'Otro'),
         allowNull: false,
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    role: {
-        type: DataTypes.ENUM('admin', 'docente', 'estudiante'),
-        allowNull: false,
-    },
-    username: {
+    contrasenna: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
     },
 }, {
-    tableName: 'users',
+    tableName: 'usuarios',
     timestamps: false, // Deshabilitar timestamps si no tienes campos `createdAt` y `updatedAt`
 });
 
