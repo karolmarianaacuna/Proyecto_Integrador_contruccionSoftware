@@ -8,16 +8,34 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Bienvenido, <%= user.name %> (Rol: <%= user.role %>)</h1>
-
-        <!-- Enlace para editar el perfil -->
-        <div>
-            <a href="/profile/edit" class="button">Editar mi información</a>
+    <div class="container-todo">
+        <div class="container-menu">
+            <div class="container-logo">
+                <a href="login.html">
+                    <img
+                      src="https://www.santototunja.edu.co/images/01-USTATunja/01-USTA-Tunja-Imagenes/logo_santoto_tunja_2022.png"
+                      alt=""
+                    />
+                  </a>
+            </div>
+            <div class="container-main-menu">
+                <a href="/profile/edit" class="button">Editar mi información</a>
+            </div>
+    
+            <div class="container-logout">
+                <form action="/logout" method="POST" style="display:inline;">
+                    <a href="/logout">Cerrar Sesión</a>
+                </form>
+            </div>
         </div>
-
-        <div>
-            <a href="/logout" class="button">Cerrar Sesión</a>
+        <div class="container-informacion">
+            <div class="container-usuario">
+                <h2>Bienvenido <%= user.nombre_usuario %></h2>
+                <p>C.C. <%= user.identificacion %></p>
+            </div>
+            <div class="container-asignaciones">
+    
+            </div>
         </div>
     </div>
 </body>

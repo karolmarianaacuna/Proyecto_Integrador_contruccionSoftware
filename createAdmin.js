@@ -10,13 +10,13 @@ async function createAdmin() {
 
         // Definir los detalles del usuario admin
         const adminDetails = {
-            identificacion: '123456789', // para modificar según información del usuario admin
+            identificacion: '2341', // para modificar según información del usuario admin
             nombre_usuario: 'Sebastian David', // para modificar según información del usuario admin
             apellido_usuario: 'Ruiz Rinta',
-            rol: 'Administrador',
+            rol: 'Estudiante',
             genero: 'Masculino',
-            email: 'admin@example.com', // para modificar según información del usuario admin
-            contrasenna: 'admin123', // para modificar según información del usuario admin
+            email: 'estudiante@example.com', // para modificar según información del usuario admin
+            contrasenna: 'estudiante123', // para modificar según información del usuario admin
         };
 
         // Comprobar si el usuario admin ya existe basado en username o identification

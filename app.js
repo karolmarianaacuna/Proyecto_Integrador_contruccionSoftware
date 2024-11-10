@@ -84,7 +84,7 @@ app.post('/login', async (req, res) => {
 app.get('/dashboard', isAuthenticated, async (req, res) => {
     try {
         const loggedInUser = await User.findByPk(req.session.userId);
-        if (loggedInUser.role === 'admin') {
+        if (loggedInUser.rol === 'Administrador') {
             const allUsers = await User.findAll();
             return res.render('adminDashboard', { user: loggedInUser, users: allUsers });
         } else {
