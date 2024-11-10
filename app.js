@@ -35,7 +35,7 @@ function isAuthenticated(req, res, next) {
 
 // Middleware para verificar si el usuario es administrador
 function isAdmin(req, res, next) {
-    if (req.session.rol === 'Administrador') {
+    if (req.session.role === 'Administrador') {
         return next();
     }
     res.status(403).send('Acceso denegado');
@@ -112,6 +112,16 @@ app.get('/users/create', isAuthenticated, isAdmin, (req, res) => {
     res.render('createUser', { error: req.query.error }); // Pasa req.query.error a la vista
 });
 
+app.get('/users/list', async (req,res) =>{
+    try {
+        const users = await User.findAll(); // Suponiendo que `User` es el modelo de Sequelize para usuarios
+        res.render('people', { users }); // Pasa `users` a la vista
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al obtener los usuarios');
+    }
+})
+
 
 // Ruta para crear un usuario
 app.post('/users', isAuthenticated, isAdmin, async (req, res) => {
@@ -132,7 +142,7 @@ app.post('/users', isAuthenticated, isAdmin, async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(contrasenna, 10);
-        await User.create({  identificacion, nombre_usuario, apellido_usuario, rol, genero, email, hashedPassword });
+        await User.create({  identificacion, nombre_usuario, apellido_usuario, rol, genero, email, contrasenna: hashedPassword });
         res.redirect('/dashboard?success=Usuario creado con éxito');
     } catch (err) {
         console.error(err);
@@ -147,7 +157,7 @@ app.get('/users/edit/:id', isAuthenticated, async (req, res) => {
         const user = await User.findByPk(req.params.id);
         
         // Permitir edición si el usuario es admin o está editando su propia información
-        if (req.session.rol !== 'Administrador' && req.session.userId !== user.id) {
+        if (req.session.role !== 'Administrador' && req.session.userId !== user.id) {
             return res.status(403).send('Acceso denegado');
         }
 

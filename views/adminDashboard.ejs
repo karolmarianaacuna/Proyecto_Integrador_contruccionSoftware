@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="/css/styles.css" />
 
     <link
       rel="shortcut icon"
@@ -24,60 +24,71 @@
         </div>
         <ul class="navegacion_admi">
           <li>
-            <img
-              src="https://cdn-icons-png.freepik.com/512/9750/9750884.png?ga=GA1.1.67356358.1685806904"
-              alt=" foto-administrador"
-            />
+            <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
 
-            <a href="">Administrar usuarios</a>
+            <a href="/users/create">Agregar Usuario</a>
           </li>
           <li>
-            <img
-              src="https://cdn-icons-png.freepik.com/512/417/417756.png?ga=GA1.1.67356358.1685806904"
-              alt="foto-listar"
-            />
-            <a href="">listar usuarios</a>
+            <img src="/img/undraw_reminder_re_fe15.svg" alt="" />
+            <a href="/users/list">Listar Usuarios</a>
           </li>
           <li>
-            <img
-              src="https://cdn-icons-png.freepik.com/512/3287/3287505.png?ga=GA1.1.67356358.1685806904"
-              alt="salir"
-            />
-            <a href="">salir del sistema</a>
+            <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
+            <a href="/logout">salir del sistema</a>
           </li>
         </ul>
       </div>
       <div class="grid_dashboard">
         <div class="item_bienvenida">
-          <h2>Bienvenido, <%= user.nombre_usuario %> (Rol: <%= user.rol %>)</h2>
-          <p>Identificación: <%= user.identificacion %></p>
+          <div>
+            <h2>Bienvenido, <%= user.nombre_usuario %> (Rol: <%= user.rol %>)</h2>
+            <p>Identificación: <%= user.identificacion %></p>
+          </div>
+          <div>
+            <img
+              class="img_bienvenida"
+              src="/img/undraw_engineering_team_a7n2(1).svg"
+              alt=""
+            />
+          </div>
         </div>
 
         <div class="grid_user_dashboard">
-          <div class="item item_1">
-            <a href="">Agregar usuarios </a>
-          </div>
-          <div class="item item_2">
-            <div>
-              <a href="">listar usuarios </a>
-            </div>
-          </div>
-          <div class="item item_3">
-            <form action="/logout" method="POST" style="display:inline;">
-                <a href="/logout">Cerrar Sesión |</a>
-            </form>
+          <div class="item_4">
+            <img
+              class="img_bienvenida2"
+              src="img/undraw_mobile_encryption_re_yw3o.svg"
+              alt="aa"
+            />
           </div>
 
-          <div class="item_4">
-            <table>
+          <div class="item item_1">
+            <img
+              class="img_bienvenida"
+              src="/img/undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_search_engines_041x_-2-_cl95_o7o8_pigd_-1-_wbm3_t5p8_-1-_mt5l_-2-_dhxr_-2-_nmxe.svg"
+              alt=""
+            />
+            <a href="/users/create">Agregar Usuarios</a>
+          </div>
+          <div class="item item_2">
+            <img
+              class="img_bienvenida"
+              src="/img/undraw_learning_sketching_nd4f.svg"
+              alt=""
+            />
+            <a href="/users/list">Listar Usuarios</a>
+          </div>
+
+          <div class="item_5">
+            <table class="tb-inicio">
               <thead>
                 <tr>
-                  <th>Identificación</th> 
+                  <th>Identificación</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
-                  <th>Email</th>
                   <th>Rol</th>
                   <th>Genero</th>
+                  <th>Email</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -87,9 +98,9 @@
                   <td><%= u.identificacion %></td>
                   <td><%= u.nombre_usuario %></td>
                   <td><%= u.apellido_usuario %></td>
-                  <td><%= u.email %></td>
                   <td><%= u.rol %></td>
                   <td><%= u.genero %></td>
+                  <td><%= u.email %></td>
                   <td>
                     <a href="/users/edit/<%= u.id %>">Editar</a>
                     <form
