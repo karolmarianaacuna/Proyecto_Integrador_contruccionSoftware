@@ -97,12 +97,13 @@ footer {
 }
 
 button {
-  background-color: white;
-  color: #213864;
+  background-color: #213864;
+  color: white;
   font-weight: 400;
   border: none;
   border-radius: 10px;
-  padding: 10px 70px;
+  padding: 10px 40px;
+  margin: 5px;
 }
 
 button:hover {
@@ -208,7 +209,7 @@ form {
 .img_bienvenida {
   height: 150px;
 }
-.imag_flex{
+.imag_flex {
   display: flex;
   flex-direction: column;
 }
@@ -225,7 +226,7 @@ form {
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  background-color: #6a93bc;
+  background-color: #14405c;
   font-size: 15px;
   margin: 10px;
 }
