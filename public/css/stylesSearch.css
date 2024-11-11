@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    height: 100vh;
+  }
+
+/* Contenedor principal que aloja el contenido */
+.container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 50px; /* Margen superior de 50px, centrado horizontalmente */
+    padding: 30px; /* Relleno interno del contenedor */
+    background-color: #fff; /* Color de fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    text-align: center; /* Centrar texto dentro del contenedor */
+}
+
+/* Estilo para el encabezado principal */
+h1 {
+    font-size: 2rem; /* Tamaño de la fuente del encabezado */
+    color: #007bff; /* Color del texto del encabezado */
+    margin-bottom: 20px; /* Margen inferior del encabezado */
+}
+
+/* Estilo para los campos de entrada */
+input {
+    width: 80%; /* Ancho del campo de entrada */
+    padding: 12px; /* Espaciado interno del campo */
+    margin: 0 auto 20px auto; /* Margen superior e inferior */
+    border: 1px solid #ced4da; /* Borde del campo de entrada */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente */
+    transition: border-color 0.3s ease-in-out; /* Transición suave para el borde */
+    display: block; /* Mostrar como bloque */
+}
+
+/* Estilo del campo de entrada cuando está en foco */
+input:focus {
+    border-color: #007bff; /* Cambiar color del borde al enfocarse */
+    outline: none; /* Sin contorno al enfocarse */
+}
+
+/* Estilo para tablas */
+table {
+    width: 100%; /* Ancho completo de la tabla */
+    margin-top: 30px; /* Margen superior de la tabla */
+    border-collapse: separate; /* Separar bordes */
+    border-spacing: 0; /* Sin espacio entre bordes */
+}
+
+/* Estilo para las celdas de la tabla */
+table th, table td {
+    padding: 12px; /* Espaciado interno de celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+    border-bottom: 1px solid #ced4da; /* Borde inferior de las celdas */
+}
+
+/* Estilo para el encabezado de la tabla */
+table th {
+    background-color: #007bff; /* Color de fondo del encabezado */
+    color: white; /* Color del texto del encabezado */
+}
+
+/* Estilo para filas de la tabla al pasar el mouse */
+table tr:hover {
+    background-color: #f1f1f1; /* Color de fondo de la fila al pasar el mouse */
+}
+
+/* Clase oculta para elementos que no deben mostrarse */
+.hidden {
+    display: none; /* No mostrar el elemento */
+}
+
+/* Estilo para la ventana modal */
+.modal {
+    position: fixed; /* Posicionamiento fijo */
+    z-index: 999; /* Asegura que esté en la parte superior */
+    left: 0; /* Alinear a la izquierda */
+    top: 0; /* Alinear en la parte superior */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Permitir desplazamiento */
+    background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+}
+
+/* Estilo del contenido de la ventana modal */
+.modal-content {
+    background-color: #fefefe; /* Color de fondo del contenido modal */
+    margin: 15% auto; /* Margen superior e inferior, centrado horizontalmente */
+    padding: 20px; /* Relleno interno del contenido */
+    border: 1px solid #888; /* Borde del contenido */
+    width: 80%; /* Ancho del contenido */
+    max-width: 500px; /* Ancho máximo del contenido */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilo para el botón de cerrar de la modal */
+.close-button {
+    color: #aaa; /* Color del texto del botón de cerrar */
+    float: right; /* Alinear a la derecha */
+    font-size: 28px; /* Tamaño de fuente del botón de cerrar */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilo para el botón de cerrar al pasar el mouse o al enfocar */
+.close-button:hover,
+.close-button:focus {
+    color: black; /* Cambiar color al pasar el mouse */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+}
+
+/* Estilos generales de los botones */
+button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 12px 20px; /* Espaciado interno del botón */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente del botón */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para fondo y sombra */
+    outline: none; /* Sin borde de enfoque */
+}
+
+/* Estilo del botón al pasar el mouse */
+button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+/* Estilo del botón al hacer clic */
+button:active {
+    background-color: #004085; /* Color de fondo al hacer clic */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra al hacer clic */
+    transform: translateY(2px); /* Desplazamiento al hacer clic */
+}
+
+/* Espacio entre el formulario y la caja de búsqueda */
+#personForm {
+    margin-bottom: 20px; /* Margen inferior del formulario */
+}
+
+#personForm div{
+    margin-bottom: 20px;
+}
+
+select{
+    width: 83%;
+    height: 43px;
+    border: #ced4da solid 1px;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
+#modalForm div{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Menu */
+.container-grid {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    height: 100vh;
+  }
+  
+  .grid_navegacion {
+    background-color: #213864;
+  }
+  .img_logo {
+    width: 250px;
+    height: 70px;
+    margin: 50px 20px;
+  }
+  
+  .navegacion_admi {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .navegacion_admi li {
+    display: flex;
+    align-items: center;
+    background-color: #415884df;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  .navegacion_admi li a:hover {
+    border-bottom: 1px solid white;
+    transition: 0.5s;
+    color: #3498db;
+  }
+  
+  .navegacion_admi li img {
+    width: 50px;
+    margin-left: 20px;
+  }
+  
+  .navegacion_admi a {
+    text-decoration: none;
+    color: #fefefe;
+    font-family: var(--parrafos);
+    margin-left: 10px;
+  }

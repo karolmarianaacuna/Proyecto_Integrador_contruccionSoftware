@@ -10,35 +10,36 @@ async function createAdmin() {
 
         // Definir los detalles del usuario admin
         const adminDetails = {
-            name: 'Admin User',
-            identification: '123456789', // para modificar según información del usuario admin
-            username: 'admin12', // para modificar según información del usuario admin
-            password: 'admin123', // para modificar según información del usuario admin
-            email: 'admin@example.com', // para modificar según información del usuario admin
-            role: 'admin' // rol definido para el primer usuario admin de la aplicación
+            identificacion: '2341', // para modificar según información del usuario admin
+            nombre_usuario: 'Sebastian David', // para modificar según información del usuario admin
+            apellido_usuario: 'Ruiz Rinta',
+            rol: 'Estudiante',
+            genero: 'Masculino',
+            email: 'estudiante@example.com', // para modificar según información del usuario admin
+            contrasenna: 'estudiante123', // para modificar según información del usuario admin
         };
 
         // Comprobar si el usuario admin ya existe basado en username o identification
         const existingAdmin = await User.findOne({ 
             where: { 
                 [Op.or]: [
-                    { username: adminDetails.username },
-                    { identification: adminDetails.identification }
+                    { email: adminDetails.email },
+                    { identificacion: adminDetails.identificacion }
                 ]
             }
         });
         
         if (existingAdmin) {
-            console.log('El usuario admin ya existe con el mismo username o identification.'); // O puedes lanzar un error si prefieres
+            console.log('El usuario admin ya existe con el mismo email o identificación.'); // O puedes lanzar un error si prefieres
             return;
         }
 
         // Hash de la contraseña
-        const hashedPassword = await bcrypt.hash(adminDetails.password, 10);
+        const hashedPassword = await bcrypt.hash(adminDetails.contrasenna, 10);
         // Crear el usuario admin
         await User.create({
             ...adminDetails,
-            password: hashedPassword // Guarda la contraseña hasheada
+            contrasenna: hashedPassword // Guarda la contraseña hasheada
         });
 
         console.log('Usuario admin creado exitosamente.');

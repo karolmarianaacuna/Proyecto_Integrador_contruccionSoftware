@@ -1,124 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-
-    <link
-      rel="shortcut icon"
-      href="https://c0.klipartz.com/pngpicture/128/948/gratis-png-universidad-de-saint-thomas-aquinas-universidad-de-valladolid-universidad-de-santo-tomas-universidad-de-oxford-universidad-de-santo-tomas-thumbnail.png"
-      type="image/x-icon"
-    />
-  </head>
-  <body>
-    <div class="container_grid">
-      <div class="grid_navegacion">
-        <div>
-          <img
-            class="img_logo"
-            src="https://www.santototunja.edu.co/images/01-USTATunja/01-USTA-Tunja-Imagenes/logo_santoto_tunja_2022.png"
-            alt=""
-          />
-        </div>
-        <ul class="navegacion_admi">
-          <li>
-            <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
-
-            <a href="/users/create">Crear nuevo usuario</a>
-          </li>
-          <li>
-            <img src="/img/undraw_reminder_re_fe15.svg" alt="" />
-            <a href="/projects">Admin proyectos</a>
-          </li>
-          <li>
-            <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
-            <a href="/logout">salir del sistema</a>
-          </li>
-        </ul>
-      </div>
-      <div class="grid_dashboard">
-        <div class="item_bienvenida">
-          <div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard Admin</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+        <div class="container">
             <h2>Bienvenido, <%= user.name %> (Rol: <%= user.role %>)</h2>
             <p>Identificación: <%= user.identification %></p>
-          </div>
-          <div>
-            <img
-              class="img_bienvenida"
-              src="/img/undraw_engineering_team_a7n2(1).svg"
-              alt=""
-            />
-          </div>
-        </div>
+            <a href="/users/create">| Crear nuevo usuario |</a>
+            <a href="/projects">Admin proyectos |</a>
+            <form action="/logout" method="POST" style="display:inline;">
+                <a href="/logout">Cerrar Sesión |</a>
+            </form>
 
-        <div class="grid_user_dashboard">
-          <div class="item_4">
-            <img
-              class="img_bienvenida2"
-              src="img/undraw_mobile_encryption_re_yw3o.svg"
-              alt="aa"
-            />
-          </div>
-
-          <div class="item item_1">
-            <img
-              class="img_bienvenida"
-              src="/img/undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_search_engines_041x_-2-_cl95_o7o8_pigd_-1-_wbm3_t5p8_-1-_mt5l_-2-_dhxr_-2-_nmxe.svg"
-              alt=""
-            />
-            <a href="/users/create">Crear nuevo usuario</a>
-          </div>
-          <div class="item item_2">
-            <img
-              class="img_bienvenida"
-              src="/img/undraw_learning_sketching_nd4f.svg"
-              alt=""
-            />
-            <a href="/projects">Admin proyectos</a>
-          </div>
-
-          <div class="item_5">
-            <table class="tb-inicio">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Identificación</th>
-                  <th>Email</th>
-                  <th>Rol</th>
-                  <th>Usuario</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% users.forEach(u => { %>
-                <tr>
-                  <td><%= u.id %></td>
-                  <td><%= u.name %></td>
-                  <td><%= u.identification %></td>
-                  <td><%= u.email %></td>
-                  <td><%= u.role %></td>
-                  <td><%= u.username %></td>
-                  <td>
-                    <a href="/users/edit/<%= u.id %>">Editar</a>
-                    <form
-                      action="/users/delete/<%= u.id %>"
-                      method="POST"
-                      style="display: inline"
-                    >
-                      <button
-                        type="submit"
-                        onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?')"
-                      >
-                        Eliminar
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-                <% }) %>
-              </tbody>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Identificación</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(u => { %>
+                    <tr>
+                        <td><%= u.id %></td>
+                        <td><%= u.name %></td>
+                        <td><%= u.identification %></td>
+                        <td><%= u.email %></td>
+                        <td><%= u.role %></td>
+                        <td><%= u.username %></td>
+                        <td>
+                            <a href="/users/edit/<%= u.id %>">Editar</a>
+                            <form action="/users/delete/<%= u.id %>"
+                                method="POST" style="display:inline;">
+                                <button type="submit"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
             </table>
           </div>
         </div>
