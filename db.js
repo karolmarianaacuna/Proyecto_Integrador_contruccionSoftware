@@ -1,7 +1,7 @@
 // db.js
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("csv_database1", "root", "", {
+const sequelize = new Sequelize("db_usuarios", "root", "", {
   host: "localhost",
   dialect: "mysql",
   logging: false, //para mostrar consultas SQL en la consola al ejecutarse
