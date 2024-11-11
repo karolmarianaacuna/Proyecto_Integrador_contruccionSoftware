@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const sequelize = require('./db');
 const User = require('./models/User'); // Importar el modelo de usuario
+require('dotenv').config();
 
 const { Op } = require('sequelize');
 
@@ -34,7 +35,7 @@ function isAuthenticated(req, res, next) {
 
 // Middleware para verificar si el usuario es administrador
 function isAdmin(req, res, next) {
-    if (req.session.role === 'admin') {
+    if (req.session.role === 'Administrador') {
         return next();
     }
     res.status(403).send('Acceso denegado');
@@ -58,20 +59,20 @@ app.get('/login', (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { identificacion, contrasenna } = req.body;
     try {
-        const user = await User.findOne({ where: { username } });
+        const user = await User.findOne({ where: { identificacion } });
         if (!user) {
-            return res.redirect('/login?error=Usuario o contraseña incorrectos');
+            return res.redirect('/login?error=Identificación o contraseña incorrectos');
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(contrasenna, user.contrasenna);
         if (!isMatch) {
-            return res.redirect('/login?error=Usuario o contraseña incorrectos');
+            return res.redirect('/login?error=Identificación o contraseña incorrectos');
         }
 
         req.session.userId = user.id;
-        req.session.role = user.role;
+        req.session.role = user.rol;
         res.redirect('/dashboard');
     } catch (err) {
         console.error(err);
@@ -83,7 +84,7 @@ app.post('/login', async (req, res) => {
 app.get('/dashboard', isAuthenticated, async (req, res) => {
     try {
         const loggedInUser = await User.findByPk(req.session.userId);
-        if (loggedInUser.role === 'admin') {
+        if (loggedInUser.rol === 'Administrador') {
             const allUsers = await User.findAll();
             return res.render('adminDashboard', { user: loggedInUser, users: allUsers });
         } else {
@@ -111,27 +112,37 @@ app.get('/users/create', isAuthenticated, isAdmin, (req, res) => {
     res.render('createUser', { error: req.query.error }); // Pasa req.query.error a la vista
 });
 
+app.get('/users/list', async (req,res) =>{
+    try {
+        const users = await User.findAll(); // Suponiendo que `User` es el modelo de Sequelize para usuarios
+        res.render('people', { users }); // Pasa `users` a la vista
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al obtener los usuarios');
+    }
+})
+
 
 // Ruta para crear un usuario
 app.post('/users', isAuthenticated, isAdmin, async (req, res) => {
-    const { name, identification, password, email, role, username } = req.body;
+    const { identificacion, nombre_usuario, apellido_usuario, rol, genero, email, contrasenna } = req.body;
     try {
         // Verificar si el nombre de usuario o la identificación son únicos
         const existingUser = await User.findOne({ 
             where: {
                 [Op.or]: [
-                    { username },
-                    { identification }
+                    { identificacion },
+                    { email }
                 ]
             }
         });
 
         if (existingUser) {
-            return res.redirect(`/users/create?error=El nombre de usuario o la identificación ya están en uso`);
+            return res.redirect(`/users/create?error=La identificación o el email ya están en uso`);
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        await User.create({ name, identification, password: hashedPassword, email, role, username });
+        const hashedPassword = await bcrypt.hash(contrasenna, 10);
+        await User.create({  identificacion, nombre_usuario, apellido_usuario, rol, genero, email, contrasenna: hashedPassword });
         res.redirect('/dashboard?success=Usuario creado con éxito');
     } catch (err) {
         console.error(err);
@@ -146,7 +157,7 @@ app.get('/users/edit/:id', isAuthenticated, async (req, res) => {
         const user = await User.findByPk(req.params.id);
         
         // Permitir edición si el usuario es admin o está editando su propia información
-        if (req.session.role !== 'admin' && req.session.userId !== user.id) {
+        if (req.session.role !== 'Administrador' && req.session.userId !== user.id) {
             return res.status(403).send('Acceso denegado');
         }
 
@@ -159,18 +170,18 @@ app.get('/users/edit/:id', isAuthenticated, async (req, res) => {
 
 // Ruta para actualizar un usuario
 app.post('/users/update/:id', isAuthenticated, async (req, res) => {
-    const { name, identification, password, email, role, username } = req.body;
+    const { identificacion, nombre_usuario, apellido_usuario, rol, genero, email, contrasenna } = req.body;
 
     try {
         const user = await User.findByPk(req.params.id);
 
         // Validar que el usuario esté editando su propia información o sea admin
-        if (req.session.role !== 'admin' && req.session.userId !== user.id) {
+        if (req.session.rol !== 'Administrador' && req.session.userId !== user.id) {
             return res.status(403).send('Acceso denegado');
         }
 
         // Si el usuario que está editando es un admin, no permitir que cambie su propio rol
-        if (req.session.role === 'admin' && req.session.userId === user.id && role !== user.role) {
+        if (req.session.rol === 'Administrador' && req.session.userId === user.id && rol !== user.rol) {
             return res.redirect(`/users/edit/${req.params.id}?error=No puedes cambiar tu propio rol`);
         }
 
@@ -178,30 +189,32 @@ app.post('/users/update/:id', isAuthenticated, async (req, res) => {
         const existingUser = await User.findOne({ 
             where: {
                 [Op.or]: [
-                    { username: username, id: { [Op.ne]: req.params.id } },
-                    { identification: identification, id: { [Op.ne]: req.params.id } }
+                    { Email: email, id: { [Op.ne]: req.params.id } },
+                    { identificacion: identificacion, id: { [Op.ne]: req.params.id } }
                 ]
             }
         });
 
         if (existingUser) {
-            return res.redirect(`/users/edit/${req.params.id}?error=El nombre de usuario o la identificación ya están en uso`);
+            return res.redirect(`/users/edit/${req.params.id}?error=El email o la identificación ya están en uso`);
         }
 
-        const hashedPassword = password ? await bcrypt.hash(password, 10) : user.password;
+        const hashedPassword = contrasenna ? await bcrypt.hash(contrasenna, 10) : user.contrasenna;
         
         // Actualizar el usuario sin modificar el rol si es un admin que se edita a sí mismo
         const updateData = { 
-            name, 
-            identification, 
-            password: hashedPassword, 
+            identificacion, 
+            nombre_usuario, 
+            apellido_usuario, 
+            rol, 
+            genero, 
             email, 
-            username 
+            hashedPassword
         };
 
         // Solo permitir modificar el rol si no es el admin editándose a sí mismo
-        if (!(req.session.role === 'admin' && req.session.userId === user.id)) {
-            updateData.role = role;
+        if (!(req.session.rol === 'Administrador' && req.session.userId === user.id)) {
+            updateData.rol = rol;
         }
 
         await user.update(updateData);
@@ -245,25 +258,25 @@ app.get('/profile/edit', isAuthenticated, async (req, res) => {
 });
 
 app.post('/profile/update', isAuthenticated, async (req, res) => {
-    const { name, identification, password, email, username } = req.body;
+    const { identificacion, nombre_usuario, apellido_usuario, rol, genero, email, contrasenna } = req.body;
 
     try {
         const user = await User.findByPk(req.session.userId);
 
         // Validar la unicidad del nombre de usuario y la identificación
-        const existingUserByUsername = await User.findOne({ where: { username, id: { [Op.ne]: user.id } } });
-        const existingUserByIdentification = await User.findOne({ where: { identification, id: { [Op.ne]: user.id } } });
+        const existingUserByUsername = await User.findOne({ where: { email, id: { [Op.ne]: user.id } } });
+        const existingUserByIdentification = await User.findOne({ where: { identificacion, id: { [Op.ne]: user.id } } });
 
         if (existingUserByUsername) {
-            return res.redirect(`/profile/edit?error=El nombre de usuario ya está en uso`);
+            return res.redirect(`/profile/edit?error=El email del usuario ya está en uso`);
         }
 
         if (existingUserByIdentification) {
             return res.redirect(`/profile/edit?error=La identificación ya está en uso`);
         }
 
-        const hashedPassword = password ? await bcrypt.hash(password, 10) : user.password;
-        await user.update({ name, identification, password: hashedPassword, email, username });
+        const hashedPassword = contrasenna ? await bcrypt.hash(contrasenna, 10) : user.contrasenna;
+        await user.update({ identificacion, nombre_usuario, apellido_usuario, rol, genero, email, hashedPassword});
         res.redirect('/dashboard?success=Perfil actualizado con éxito');
     } catch (err) {
         console.error(err);

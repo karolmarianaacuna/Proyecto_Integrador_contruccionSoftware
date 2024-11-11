@@ -9,18 +9,19 @@ npm install bcryptjs
 
 # base de datos
 
-CREATE DATABASE IF NOT EXISTS csv_database1;
-USE csv_database1;
+CREATE DATABASE IF NOT EXISTS db_usuarios;
+USE db_usuarios;
 
-CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    identification VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'docente', 'estudiante') NOT NULL,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    PRIMARY KEY (id)
+CREATE TABLE usuarios (
+	id INTEGER auto_increment PRIMARY KEY,
+	identificacion VARCHAR(50) UNIQUE NOT NULL,
+	nombre_usuario VARCHAR(50) NOT NULL,
+	apellido_usuario VARCHAR(50) NOT NULL,
+	rol ENUM('Administrador', 'Docente', 'Estudiante'),
+	genero ENUM('Masculino', 'Femenino', 'Otro'),
+    email VARCHAR(255) NOT NULL UNIQUE NOT NULL,
+	contrasenna VARCHAR(255) NOT NULL,
+	fecha_registro TIMESTAMP DEFAULT DEFAULT CURRENT_TIMESTAMP
 );
 
 # ejs: 

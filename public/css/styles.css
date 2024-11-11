@@ -20,7 +20,7 @@ body {
 
 .dividir_dos {
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 60% 40%;
   height: 100%;
   width: 100%;
 }
@@ -31,23 +31,22 @@ body {
 }
 
 .banner2 {
-  background-image: url("https://craftwork-images.b-cdn.net/wp-content/uploads/grainy-20-looking-for-inspiration.png");
-}
-.img1 {
-  background-image: url("https://craftwork.design/wp-content/uploads/grainy-18-current-project.png");
+  background-image: url("https://u-static.fotor.com/images/text-to-image/result/PRO-4ff108380b5b4c9fb9740381279aef11.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .seccion_derecha {
-  height: 38rem;
-  width: 30rem;
+  height: 30rem;
+  width: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   margin: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 0 26px rgba(82, 88, 195, 0.553);
   font-family: var(--parrafos);
   background-color: #213864;
   color: white;
@@ -55,18 +54,46 @@ body {
 .cabecera a {
   color: white;
 }
+/*.cabecera {
+  border-bottom: 4px solid rgb(255, 255, 255) !important;
+} */
 
 .seccion_derecha h2 {
   font-family: var(--titulo);
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 800;
 }
-.busqueda h2 {
+.seccion_derecha p {
+  font-family: var(--parrafos);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.cabecera {
+  background-color: #213864;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  color: white;
   font-family: var(--titulo);
-  font-size: 2rem;
-  font-weight: 900;
-  text-align: center;
-  color: #213864;
+}
+.cabecera img {
+  width: 243px;
+  height: 68px;
+  margin: 40px;
+}
+.cabecera h1 {
+  font-size: 2.2rem;
+}
+footer {
+  display: grid;
+  place-items: center;
+  background-color: #213864;
+  height: 50px;
+  color: white;
+  font-family: var(--titulo);
 }
 
 button {
@@ -92,6 +119,7 @@ button:hover {
   margin: 1px;
   display: flex;
   flex-direction: column;
+  font-size: 15px;
 }
 
 input,
@@ -112,78 +140,135 @@ form {
   gap: 10px;
 }
 
-.cabecera {
-  background-color: #213864;
-  height: 100px;
+/* ----------------------------------------------------------------------------- */
+
+/* admiDashboard.ejs */
+
+.container_grid {
   display: grid;
+  grid-template-columns: 20% 80%;
+  height: 100vh;
+}
+
+.grid_navegacion {
+  background-color: #213864;
+}
+.img_logo {
+  width: 250px;
+  height: 70px;
+  margin: 50px 20px;
+}
+
+.navegacion_admi {
+  list-style: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 40px;
-  color: white;
-  font-family: var(--titulo);
+  flex-direction: column;
 }
-.cabecera img {
-  width: 243px;
-  height: 68px;
-  margin: 30px;
-}
-.cabecera h1 {
-  font-size: 2.2rem;
-}
-footer {
-  display: grid;
-  place-items: center;
-  background-color: #213864;
-  height: 50px;
-  color: white;
-  font-family: var(--titulo);
-}
-.redirecionamiento {
+.navegacion_admi li {
   display: flex;
-  gap: 2px;
-  margin: 5px;
+  align-items: center;
+  background-color: #415884df;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
 }
-.redirecionamiento a {
+
+.navegacion_admi li a:hover {
+  border-bottom: 1px solid white;
+  transition: 0.5s;
   color: #3498db;
 }
 
-.banner1 {
-  background-image: url("hhttps://craftwork-images.b-cdn.net/wp-content/uploads/grainy-17-connection-quality.png");
+.navegacion_admi li img {
+  width: 50px;
+  margin-left: 20px;
 }
 
-/* ----------------------------------------------------------------------------- */
-
-/* index.html */
-
-.grid-dashboard {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  justify-content: center;
-  align-content: center;
-  margin: 10px;
-  gap: 70px;
+.navegacion_admi a {
+  text-decoration: none;
+  color: #fefefe;
+  font-family: var(--parrafos);
+  margin-left: 10px;
 }
-.cabecera_dasboard {
-  justify-content: space-around;
+.grid_dashboard {
+  margin: 50px;
+}
+.item_bienvenida {
+  background-color: #26658c;
+  height: 8rem;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
   align-items: center;
+  justify-content: space-around;
+  color: #ffffff;
+  font-family: var(--parrafos);
 }
-.grid-1,
-.grid-2 {
+.img_bienvenida {
+  height: 150px;
+}
+.imag_flex{
+  display: flex;
+  flex-direction: column;
+}
+.grid_user_dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 30px 10px;
+  gap: 10px;
+}
+.item {
+  font-family: var(--parrafos);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #213864;
-  padding: 8px;
-  color: aliceblue;
-  font-family: var(--parrafos);
-  height: 10rem;
-  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #6a93bc;
+  font-size: 15px;
+  margin: 10px;
+}
+.item a {
+  text-decoration: none;
+  color: #fefefe;
+  padding: 10px;
+  margin-top: 15px;
 }
 
-.grid-1 img,
-.grid-2 img {
-  height: 50px;
+.item a:hover {
+  border-bottom: 1px solid white;
+  transition: 0.5s;
+  color: #c1deec;
+}
+
+.item_1 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 4;
+}
+.item_2 {
+  grid-column: 3 / 4;
+  grid-row: 1 / 4;
+}
+.item_3 {
+  grid-column: 3 / 4;
+}
+.item_4 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+}
+.img_bienvenida2 {
+  height: 300px;
+  padding: 10px;
+}
+
+.item_5 {
+  background-color: #ffffff;
+  grid-column: 1 / 4;
+}
+
+.tb-inicio {
+  font-size: 14px;
   margin: 10px;
 }
 
@@ -251,29 +336,79 @@ table th {
   border-radius: 12px; /* Bordes redondeados */
 }
 
-/* Estilo para el botón de cerrar de la modal */
-.close-button {
-  color: #aaa; /* Color del texto del botón de cerrar */
-  float: right; /* Alinear a la derecha */
-  font-size: 28px; /* Tamaño de fuente del botón de cerrar */
-  font-weight: bold; /* Negrita */
+/* Estilo para el dashboard usuarios */
+.container-todo {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* 300px para el menú y el resto para el contenido */
+  margin: 0;
+  padding: 0;
+  gap: 0; /* Sin espacio entre las columnas */
+  width: 100%; /* Para que ocupe todo el ancho */
 }
 
-/* Estilo para listas no ordenadas */
-ul {
-  list-style: none; /* Eliminar puntos de la lista */
-  padding: 0; /* Eliminar relleno */
-  margin: 0; /* Eliminar margen */
-  font-family: var(--parrafos);
+.container-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh; /* Altura completa de la pantalla */
+  width: 300px;
+  background-color: #213864;
 }
 
-/* Estilo para los elementos de la lista */
-ul li {
-  padding: 12px; /* Espaciado interno de cada elemento */
-  margin-bottom: 8px; /* Margen inferior entre elementos */
-  border-radius: 8px; /* Bordes redondeados */
-  border: 1px solid #06386a; /* Borde del elemento de la lista */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+.container-menu a{
+  text-decoration: none;
+  color: #fefefe;
   font-family: var(--parrafos);
+  margin-left: 10px;
+}
+
+.container-menu a:hover{
+  border-bottom: 1px solid white;
+  transition: 0.5s;
+  color: #3498db;
+}
+
+.container-logo img {
+  width: 250px;
+  height: 70px;
+  margin: 20px;
+  margin-top: 50px;
+}
+
+.container-main-menu{
+  text-align: center;
+  height: 40px;
+  background-color: #415884df;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 12px;
+  padding-top: 8px;
+}
+
+.container-logout{
+  text-align: center;
+  background-color: #415884df;
+  height: 40px;
+  margin-bottom: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 12px;
+  padding-top: 8px;
+}
+
+.container-informacion {
+  padding: 20px;
+  margin: 100px 200px 600px 200px;
+  text-align: center;
+  background-color: #4ab0d9;
+  border-radius: 40px;
+
+}
+
+.container-informacion h2{
+  color: #fefefe;
+}
+
+.container-informacion p{
+  color: #fefefe;
 }
