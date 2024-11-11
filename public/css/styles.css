@@ -105,6 +105,10 @@ button {
   padding: 10px 40px;
   margin: 5px;
 }
+.inicio {
+  background-color: #ffffff;
+  color: #213864;
+}
 
 button:hover {
   color: white;
