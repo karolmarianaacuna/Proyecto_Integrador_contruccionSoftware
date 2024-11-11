@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered People</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container_grid">
+        <div class="grid_navegacion">
+            <div>
+              <img
+                class="img_logo"
+                src="https://www.santototunja.edu.co/images/01-USTATunja/01-USTA-Tunja-Imagenes/logo_santoto_tunja_2022.png"
+                alt=""
+              />
+            </div>
+            <ul class="navegacion_admi">
+              <li>
+                <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
+    
+                <a href="/dashboard">Inicio</a>
+              </li>
+              <li>
+                <img src="/img/undraw_reminder_re_fe15.svg" alt="" />
+                <a href="/users/create">Agregar Usuario</a>
+              </li>
+              <li>
+                <img src="/img/undraw_male_avatar_g98d.svg" alt="" />
+                <a href="/logout">salir del sistema</a>
+              </li>
+            </ul>
+          </div>
+      <div class="container">
+        <h1>Registered People</h1>
+        <table class="tb-inicio">
+          <thead>
+            <tr>
+              <th>Identificación</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Rol</th>
+              <th>Genero</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(u => { %>
+            <tr>
+              <td><%= u.identificacion %></td>
+              <td><%= u.nombre_usuario %></td>
+              <td><%= u.apellido_usuario %></td>
+              <td><%= u.rol %></td>
+              <td><%= u.genero %></td>
+              <td><%= u.email %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Verificar si hay un mensaje de error en la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const error = urlParams.get("error");
+
+      if (error) {
+        alert(error); // Mostrar el mensaje de error como un alert
+      }
+    </script>
+</body>
+</html>
